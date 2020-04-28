@@ -4,6 +4,11 @@ const Schemes = require('./scheme-model.js');
 
 const router = express.Router();
 
+/////// This handles the route http://localhost:5000/api/schemes ///////
+
+
+/////////////// GET Schemes ///////////////
+
 router.get('/', (req, res) => {
   Schemes.find()
   .then(schemes => {
@@ -13,6 +18,8 @@ router.get('/', (req, res) => {
     res.status(500).json({ message: 'Failed to get schemes' });
   });
 });
+
+// GET scheme by ID //
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
@@ -30,6 +37,10 @@ router.get('/:id', (req, res) => {
   });
 });
 
+
+/////////////// GET Steps by Scheme ID ///////////////
+
+
 router.get('/:id/steps', (req, res) => {
   const { id } = req.params;
 
@@ -46,6 +57,9 @@ router.get('/:id/steps', (req, res) => {
   });
 });
 
+
+/////////////// POST Schemes ///////////////
+
 router.post('/', (req, res) => {
   const schemeData = req.body;
 
@@ -57,6 +71,9 @@ router.post('/', (req, res) => {
     res.status(500).json({ message: 'Failed to create new scheme' });
   });
 });
+
+
+/////////////// POST Steps ///////////////
 
 router.post('/:id/steps', (req, res) => {
   const stepData = req.body;
@@ -78,6 +95,9 @@ router.post('/:id/steps', (req, res) => {
   });
 });
 
+
+/////////////// PUT Schemes ///////////////
+
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
@@ -97,6 +117,9 @@ router.put('/:id', (req, res) => {
     res.status(500).json({ message: 'Failed to update scheme' });
   });
 });
+
+
+/////////////// DELETE Schemes ///////////////
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
