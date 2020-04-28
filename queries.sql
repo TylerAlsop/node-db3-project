@@ -2,7 +2,12 @@
 
 -- Display the ProductName and CategoryName for all products in the database. Shows 77 records.
 
-    
+    SELECT 
+	    p."ProductName", 
+	    c."CategoryName"
+    FROM "Product" AS p
+    JOIN "Category" AS c
+    ON p."CategoryId" = c."Id";
 
 -- Display the order Id and shipper CompanyName for all orders placed before August 9 2012. Shows 429 records.
 
