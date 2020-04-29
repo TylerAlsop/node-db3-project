@@ -24,11 +24,15 @@ function add(scheme){
 }
 
 function update(changes, id){
-
+    return db("schemes")
+    .update(changes)
+    .where({ id })
 }
 
 function remove(id){
-
+    return db("schemes")
+    .where("id", id)
+    .del()
 }
 
 
