@@ -1,11 +1,13 @@
 const db = require("../data/config")
 
 function find(){
-
+    return db("schemes")
 }
 
-function findByID(id){
-
+function findById(id){
+    return db("schemes")
+    .where("schemes.id", id)
+    
 }
 
 function findSteps(id){
@@ -27,7 +29,7 @@ function remove(id){
 
 module.exports = {
     find,
-    findByID,
+    findById,
     findSteps,
     add,
     update,
