@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
 
   Schemes.add(schemeData)
   .then(scheme => {
-    res.status(201).json(scheme);
+    res.status(201).json(schemeData);
   })
   .catch (err => {
     res.status(500).json({ message: 'Failed to create new scheme' });
@@ -82,9 +82,9 @@ router.post('/:id/steps', (req, res) => {
   Schemes.findById(id)
   .then(scheme => {
     if (scheme) {
-      Schemes.addStep(stepData, id)
+      Schemes.addStep({...stepData, scheme_id: id})
       .then(step => {
-        res.status(201).json(step);
+        res.status(201).json(stepData);
       })
     } else {
       res.status(404).json({ message: 'Could not find scheme with given id.' })
@@ -94,6 +94,39 @@ router.post('/:id/steps', (req, res) => {
     res.status(500).json({ message: 'Failed to create new step' });
   });
 });
+
+/////// To do it where the function params are the same as the stretch mvp //////
+///// This goes in this file: /////
+
+// router.post('/:id/steps', (req, res) => {
+//   const stepData = req.body;
+//   const { id } = req.params; 
+//   Schemes.findById(id)
+//   .then(scheme => {
+//     if (scheme) {
+//       Schemes.addStep(step, scheme_id)
+//       .then(step => {
+//         res.status(201).json(stepData);
+//       })
+//     } else {
+//       res.status(404).json({ message: 'Could not find scheme with given id.' })
+//     }
+//   })
+//   .catch (err => {
+//     res.status(500).json({ message: 'Failed to create new step' });
+//   });
+// });
+
+///// This goes in the scheme-model.js file: /////
+
+//   function addStep(step){
+//     return db("steps")
+//     .join("schemes", "steps.scheme_id", "schemes.id")
+//     .insert(step)
+// }
+
+
+
 
 
 /////////////// PUT Schemes ///////////////
